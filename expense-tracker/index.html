@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple expense tracker for recording income and expenses and monitoring your balance.">
+  <title>Expense Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Expense Tracker</a>
+      <nav aria-label="Main navigation">
+        <a href="#transactions">Transactions</a>
+        <a href="#summary">Summary</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p class="eyebrow">Personal finance</p>
+      <h1>Track your money in one place.</h1>
+      <p class="intro-copy">Record income and expenses, review your balance, and see where your spending is going.</p>
+    </section>
+
+    <section id="summary" class="summary-grid" aria-label="Financial summary">
+      <article class="summary-card">
+        <p>Balance</p>
+        <strong id="balance">₵0.00</strong>
+      </article>
+      <article class="summary-card">
+        <p>Income</p>
+        <strong id="income">₵0.00</strong>
+      </article>
+      <article class="summary-card">
+        <p>Expenses</p>
+        <strong id="expenses">₵0.00</strong>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel form-panel">
+        <div class="panel-heading">
+          <h2>Add transaction</h2>
+          <p>Enter the details below and save the transaction.</p>
+        </div>
+
+        <form id="transaction-form">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" maxlength="80" required placeholder="e.g. Groceries">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input id="amount" name="amount" type="number" min="0.01" step="0.01" required placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select id="type" name="type">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" name="category">
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Bills</option>
+                <option>Shopping</option>
+                <option>Education</option>
+                <option>Health</option>
+                <option>Entertainment</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+          </div>
+
+          <button class="primary-button" type="submit">Add transaction</button>
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="panel chart-panel">
+        <div class="panel-heading">
+          <h2>Spending by category</h2>
+          <p>Your recorded expenses, grouped by category.</p>
+        </div>
+        <div id="category-chart" class="category-chart" aria-label="Spending by category"></div>
+      </article>
+    </section>
+
+    <section id="transactions" class="panel transactions-panel">
+      <div class="transactions-header">
+        <div class="panel-heading">
+          <h2>Transactions</h2>
+          <p>Review or remove transactions saved in this browser.</p>
+        </div>
+        <button id="clear-all" class="secondary-button" type="button">Clear all</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col" class="amount-column">Amount</th>
+              <th scope="col"><span class="sr-only">Action</span></th>
+            </tr>
+          </thead>
+          <tbody id="transaction-list"></tbody>
+        </table>
+        <p id="empty-state" class="empty-state">No transactions yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Expense Tracker</p>
+      <div>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms and Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
